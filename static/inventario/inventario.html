@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestros Autos</title>
+    <link rel="icon" href="/static/ico/icono-1/chevrolet_logo_icon.ico" sizes="64x64">
+    <link rel="stylesheet" href="/static/inventario/inventario.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
+
+  <body class="inventario-page">
+    <!--? Header -->
+    <header>
+      <nav class="nav-bar">
+        <div id="hamburger-menu">
+          <button id="hamburger-button">
+            <span class="material-symbols-outlined"> menu </span>
+          </button>
+
+          <div class="hamburger-list">
+            <ul>
+              <li><button id="close-button">X</button></li>
+              <li><a href="#">Vehiculos</a></li>
+              <li><a href="#">Nosotros</a></li>
+              <li><a href="#">Contacto</a></li>
+              <li><a href="#">Redes</a></li>
+              <li><a href="#">Ayuda</a></li>
+            </ul>
+          </div>
+          <div id="overlay"></div>
+        </div>
+
+        <div class="logo-container">
+          <div class="navlogo">
+            <a href="/static/index.html">
+              <img src="/static/ico/icono-3/Chevrolet-Logo.svg" alt="logo" />
+            </a>
+          </div>
+        </div>
+
+        <div class="login">
+          <button id="login-button">
+            <a href="/static/login/login.html">
+              <span class="material-symbols-outlined">account_circle</span>
+            </a>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!--? contenido-->
+      <section>
+        <div class="contenedor-inventario">
+          <div class="texto-inventario">
+            <h1>Conoce nuestro inventario de autos</h1>
+            <p>
+              En esta sección podrás ver todos los autos que tenemos disponibles
+              para ti.
+            </p>
+          </div>
+          <br>
+          <!-- boton para ir a administrador.html -->
+          <button id="btnInventario"><a href="/static/inventario/administrador.html">Volver a Administrador</button></a>
+        </div>
+      </section>
+      
+      
+      <!--?inventario de autos disponibles-->
+      <section>
+        <div class="contenido-inventario">
+          <!-- Botón para abrir la interfaz de filtros -->
+          <div class="contenedor-btnFiltros">
+            <button id="btnFiltros"><span class="material-symbols-outlined">
+              filter_alt
+            </span></button>
+          </div>
+          <!-- Modal o menú desplegable de filtros -->
+          <div id="menuFiltros" class="menu-filtros" style="display:none;">
+            <button data-filter="marca">Marca</button>
+            <button data-filter="anio">Año</button>
+            <button data-sort="precio">Precio</button>
+            <!-- Agrega más opciones de filtro según necesites -->
+          </div>
+      <!-- Lista de autos -->
+      <div class="autos-table">
+          <table class="list">
+              <thead>
+                  <tr>
+                      <th>Foto</th>
+                      <th>Marca</th>
+                      <th>Modelo</th>
+                      <th>Año</th>
+                      <th>Precio</th>
+                      <th>Descripcion</th>
+                      <th>Color</th>
+                      <th>Motor</th>
+                      <th>Proveedor</th>
+                      <th>Puertas</th>
+                      <th>Fecha</th>
+                  </tr>
+              </thead>
+              <tbody id="autoList">
+                  <!-- acá se van a agregar los autos -->
+                   
+              </tbody>
+          </table>
+      </div>
+
+  </div>
+</section>
+    </main>
+
+    <!-- Footer -->
+    <footer></footer>
+
+    <!--? Scripts -->
+    <script>
+      const URL = "http://127.0.0.1:5000/"
+      // Realizamos la solicitud GET al servidor para obtener todos los autos.
+  
+      fetch(URL + 'autos')
+            .then(function (response) {
+                if (response.ok) {
+                    //Si la respuesta es exitosa (response.ok), convierte el cuerpo de la respuesta de formato JSON a un objeto JavaScript y pasa estos datos a la siguiente promesa then.
+                    return response.json(); 
+            } else {
+                    // Si hubo un error, lanzar explícitamente una excepción para ser "catcheada" más adelante
+                    throw new Error('Error al obtener autos.');
+                }
+            })
+
+            //Esta función maneja los datos convertidos del JSON.
+            .then(function (data) {
+                let autoList = document.getElementById('autoList'); //Selecciona el elemento del DOM donde se mostrarán los autos.
+
+                // Iteramos sobre cada auto y agregamos filas a la tabla
+                for (let autos of data) {
+                    let fila = document.createElement('tr'); //Crea una nueva fila de tabla (<tr>) para cada auto.
+                      fila.innerHTML= `<td><img src=${autos.foto} alt="Foto del auto" style="width: 100px;"></td>` +
+                                      `<td>${autos.marca}</td>` +
+                                      `<td>${autos.modelo}</td>` +
+                                      `<td>${autos.anio}</td>` +
+                                      `<td>${autos.precio}</td>` +
+                                      `<td>${autos.descripcion}</td>` +
+                                      `<td>${autos.color}</td>` +
+                                      `<td>${autos.motor}</td>` +
+                                      `<td>${autos.proveedor}</td>` +
+                                      `<td>${autos.puertas}</td>` +
+                                      `<td>${autos.fecha}</td>`;
+                        
+                        //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+                        //'<td><img src=https://www.pythonanywhere.com/user/USUARIO/files/home/USUARIO/mysite/static/imagenes/' + producto.imagen_url +' alt="Imagen del producto" style="width: 100px;"></td>' + '<td align="right">' + producto.proveedor + '</td>';
+                    
+                    //Una vez que se crea la fila con el contenido del auto, se agrega a la tabla utilizando el método appendChild del elemento autoList.
+                    autoList.appendChild(fila);
+                }
+            })
+
+            //Captura y maneja errores, mostrando una alerta en caso de error al obtener los productos.
+            .catch(function (error) {
+                // Código para manejar errores
+                alert('Error al obtener autos.');
+            });
+    </script>
+    <script src="/static/inventario/inventario.js"></script>
+    <script src="/static/js/scrollreveal.js"></script>
+    <script src="/static/js/scroll.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script src="./js/contacto.js"></script>
+    <script
+      src="https://kit.fontawesome.com/c3e2e6ff32.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

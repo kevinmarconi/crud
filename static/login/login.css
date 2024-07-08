@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+*{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(../img/mh-home-silverado-arg-desk.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(20px);
+}
+
+.container{
+    /* border: 10px solid red; */
+    padding: 50px 100px 30px 100px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    border-radius: 25px;
+}
+
+form img{
+    position: relative;
+    left: 35px;
+} 
+
+.input-user{
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+
+} 
+
+.input-password{
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    padding-left: 11px;
+}
+
+.input-user i{
+    position: relative;
+    right: 25px;
+    top: 8px;
+}
+
+.input-password i{
+    position: relative;
+    right: 25px;
+    top: 8px;
+}
+
+.olvidar-contraseña{
+    display: flex;
+    padding-top: 25px;
+    justify-content: center;
+}
+
+.iniciar-sesion{
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    padding-bottom: 0;
+}
+
+.olvidar-contraseña a{
+    text-decoration: none;
+    color: black;
+}
+
+.olvidar-contraseña a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    color: #007bff;
+}
+
+.btn{
+    border-radius: 15px;
+    padding: 5px 80px 5px 80px;
+    border-color:gray
+}
+
+.btn:hover{
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+}
+
+.recordar-contraseña{
+    display: flex;
+    justify-content: center;
+}
+
+.titulo h1{
+    color:aliceblue;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#password{
+    padding: 5px 50px 5px 10px;
+}
+
+#usuario{
+    padding: 5px 50px 5px 10px;
+}
+
+#recordar-contraseña{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
