@@ -52,7 +52,7 @@
     </header>
 
     <main>
-
+        <!--?contenido -->
         <section>
             <div class="contenedor-inventario">
                 <div class="texto-inventario">
@@ -66,23 +66,21 @@
                 <button id="btnInventario"><a href="/static/inventario/inventario.html">Volver a Inventario</button></a>
             </div>
         </section>
-        <br>
 
-        <section class="admin-sect">
-            <div id="acciones">
-                <button id="btnAgregar" onclick="">Agregar Auto</button>
-                <button id="btnEditar" onclick="">Editar Auto</button>
-                <button id="btnEliminar" onclick="">Eliminar Auto</button>
-            </div>
-            <div id="listaAutos">
-                <!-- La lista de autos se cargará aquí -->
+        <!--?botones  -->
+        <section>
+            <div class="admin-sect">
+                <div id="acciones">
+                    <button id="btnAgregar" onclick="">Agregar Auto</button>
+                    <button id="btnEditar" onclick="">Editar Auto</button>
+                    <button id="btnEliminar" onclick="">Eliminar Auto</button>
+                </div>
             </div>
         </section>
 
-        <!-- Formulario para agregar/editar autos -->
+        <!--? Formulario para agregar/editar autos -->
         <div class="container-autoFormulario">
             <form id="autoFormulario" enctype="multipart/form-data" autocomplete="off">
-                <!-- <input type="hidden" id="autoId" /> -->
 
                 <label>Marca</label>
                 <input type="text" name="marca" id="marca" />
@@ -127,8 +125,87 @@
             </form>
         </div>
 
-        <script> // Script para enviar el formulario de agregar auto al servidor
+        <!--? Lista de autos -->
+        <section class="contenedor-tabla">
+            <div class="autos-table">
+                <table class="list">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Año</th>
+                            <th>Precio</th>
+                            <th>Descripcion</th>
+                            <th>Color</th>
+                            <th>Motor</th>
+                            <th>Proveedor</th>
+                            <th>Puertas</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="autoList">
+                        <!-- acá se van a agregar los autos -->
+                        
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        
+        <script>
             const URL = "http://127.0.0.1:5000/"
+            
+            // Realizamos la solicitud GET al servidor para obtener todos los autos.
+            
+            fetch(URL + 'autos')
+            .then(function (response) {
+                if (response.ok) {
+                        //Si la respuesta es exitosa (response.ok), convierte el cuerpo de la respuesta de formato JSON a un objeto JavaScript y pasa estos datos a la siguiente promesa then.
+                        return response.json();
+                    } else {
+                        // Si hubo un error, lanzar explícitamente una excepción para ser "catcheada" más adelante
+                        throw new Error('Error al obtener autos.');
+                    }
+                })
+
+                //Esta función maneja los datos convertidos del JSON.
+                .then(function (data) {
+                    let autoList = document.getElementById('autoList'); //Selecciona el elemento del DOM donde se mostrarán los autos.
+
+                    // Iteramos sobre cada auto y agregamos filas a la tabla
+                    for (let autos of data) {
+                        let fila = document.createElement('tr'); //Crea una nueva fila de tabla (<tr>) para cada auto.
+                        fila.innerHTML = `<td><img src=${autos.foto} alt="Foto del auto" style="width: 100px;"></td>` +
+                            `<td>${autos.marca}</td>` +
+                            `<td>${autos.modelo}</td>` +
+                            `<td>${autos.anio}</td>` +
+                            `<td>${autos.precio}</td>` +
+                            `<td>${autos.descripcion}</td>` +
+                            `<td>${autos.color}</td>` +
+                            `<td>${autos.motor}</td>` +
+                            `<td>${autos.proveedor}</td>` +
+                            `<td>${autos.puertas}</td>` +
+                            `<td>${autos.fecha}</td>`;
+
+                        //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+                        //'<td><img src=https://www.pythonanywhere.com/user/USUARIO/files/home/USUARIO/mysite/static/imagenes/' + producto.imagen_url +' alt="Imagen del producto" style="width: 100px;"></td>' + '<td align="right">' + producto.proveedor + '</td>';
+
+                        //Una vez que se crea la fila con el contenido del auto, se agrega a la tabla utilizando el método appendChild del elemento autoList.
+                        autoList.appendChild(fila);
+                    }
+                })
+
+                //Captura y maneja errores, mostrando una alerta en caso de error al obtener los productos.
+                .catch(function (error) {
+                    // Código para manejar errores
+                    alert('Error al obtener autos.');
+                });
+
+
+            // Script para enviar el formulario de agregar auto al servidor
+
+            // const URL = "http://127.0.0.1:5000/"
 
             //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
             //const URL = "https://USUARIO.pythonanywhere.com/"
@@ -184,6 +261,10 @@
                         document.getElementById('foto').value = "";
                     });
             })
+        </script>
+
+        <script>
+
         </script>
 
     </main>

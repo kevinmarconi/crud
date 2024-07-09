@@ -304,14 +304,11 @@ th, td {
     z-index: 1000; /* Asegúrate de que el modal esté sobre otros elementos */
 }
 /*? admin  */
-/* seccion de admin que contiene los botones btnAgregar, btnEliminar, btnEditar dentro del div acciones * y donde se mostraran los autos listaAutos}*/
-
 .admin-sect{
     grid-area: contenido;
     display: grid;
     grid-template-areas:
-        "acciones"
-        "listaAutos";
+        "acciones";
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     justify-content: center;
@@ -322,7 +319,6 @@ th, td {
     margin: 0;
     background-color:cadetblue;
 }
-
 .acciones{
     grid-area: acciones;
     display: flex;
@@ -334,7 +330,6 @@ th, td {
     margin: 0;
     background-color:antiquewhite;
 }
-
 #btnAgregar, #btnEliminar, #btnEditar{
     background-color:#f5f5f5;
     border: none;
@@ -344,24 +339,7 @@ th, td {
     border-radius: 5px;
     margin: 1rem;
 }
-
-.listaAutos{
-    grid-area: listaAutos;
-    display: grid;
-    grid-template-areas:
-        "botones"
-        "tabla";
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    margin: 0;
-    background-color:antiquewhite;
-}
-/* interfaz responsive tipo formulario para agregar autos */
+/*formulario para agregar autos */
 .container-autoFormulario {
     display: flex;
     flex-direction: column;
@@ -393,4 +371,40 @@ th, td {
 #fecha {
     text-align: center; /* Centra el texto dentro del input */
     cursor: not-allowed; /* Cambia el cursor para indicar que el campo es de solo lectura */
+}
+/* Estilos específicos para el botón de enviar */
+.form-action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-action-buttons button {
+    font-size: 1rem;
+    padding: 0.3rem;
+    cursor: pointer;
+    border: none;
+}
+/* botón de cancelar */
+.form-action-buttons button[type="button"] {
+    background-color: lightcoral;
+    font-size: 1rem;
+    margin: 1rem;
+}
+/* botón de enviar */
+.form-action-buttons button[type="submit"] {
+    background-color: lightgreen;
+    font-size: 1rem;
+    margin: 1rem;
+}
+
+.contenedor-tabla{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-color:lightgreen;
+    overflow-x: auto;
 }
