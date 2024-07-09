@@ -79,7 +79,7 @@
         </section>
 
         <!--? Formulario para agregar/editar autos -->
-        <div class="container-autoFormulario">
+        <div id="container-autoFormulario">
             <form id="autoFormulario" enctype="multipart/form-data" autocomplete="off">
 
                 <label>Marca</label>
@@ -125,6 +125,13 @@
             </form>
         </div>
 
+        <!--? editar auto -->
+
+
+        <!--? eliminar auto -->
+
+        
+
         <!--? Lista de autos -->
         <section class="contenedor-tabla">
             <div class="autos-table">
@@ -152,8 +159,33 @@
             </div>
         </section>
         
+        <footer></footer>
+
+        <!--? Scripts  -->
+        <script>
+            const btnAgregar = document.getElementById('btnAgregar');
+            const btnEditar = document.getElementById('btnEditar');
+            const btnEliminar = document.getElementById('btnEliminar');
+          
+            btnAgregar.addEventListener('click', function() {
+              // Lógica para mostrar el formulario de agregar auto
+
+
+            });
+          
+            btnEditar.addEventListener('click', function() {
+              // Lógica para mostrar el formulario de editar auto
+              // ...
+            });
+          
+            btnEliminar.addEventListener('click', function() {
+              // Lógica para mostrar el formulario de eliminar auto
+              // ...
+            });
+        </script>
         
         <script>
+            
             const URL = "http://127.0.0.1:5000/"
             
             // Realizamos la solicitud GET al servidor para obtener todos los autos.
@@ -262,19 +294,11 @@
                     });
             })
         </script>
-
-        <script>
-
-        </script>
-
+        <script src="/static/inventario/inventario.js"></script>
+        <script src="/static/js/script.js"></script>
+        <script src="/static/js/scrollreveal.js"></script>
+        <script src="/static/js/scroll.js"></script>
     </main>
-
-    <footer></footer>
-
-    <script src="/static/inventario/inventario.js"></script>
-    <script src="/static/js/script.js"></script>
-    <script src="/static/js/scrollreveal.js"></script>
-    <script src="/static/js/scroll.js"></script>
 </body>
 
 </html>

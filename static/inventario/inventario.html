@@ -111,66 +111,66 @@
 
       </div>
     </section>
+
+    <!-- Footer -->
+    <footer></footer>
+
+    <!--? Scripts -->
+    <script>
+      const URL = "http://127.0.0.1:5000/"
+      // Realizamos la solicitud GET al servidor para obtener todos los autos.
+
+      fetch(URL + 'autos')
+        .then(function (response) {
+          if (response.ok) {
+            //Si la respuesta es exitosa (response.ok), convierte el cuerpo de la respuesta de formato JSON a un objeto JavaScript y pasa estos datos a la siguiente promesa then.
+            return response.json();
+          } else {
+            // Si hubo un error, lanzar explícitamente una excepción para ser "catcheada" más adelante
+            throw new Error('Error al obtener autos.');
+          }
+        })
+
+        //Esta función maneja los datos convertidos del JSON.
+        .then(function (data) {
+          let autoList = document.getElementById('autoList'); //Selecciona el elemento del DOM donde se mostrarán los autos.
+
+          // Iteramos sobre cada auto y agregamos filas a la tabla
+          for (let autos of data) {
+            let fila = document.createElement('tr'); //Crea una nueva fila de tabla (<tr>) para cada auto.
+            fila.innerHTML = `<td><img src=${autos.foto} alt="Foto del auto" style="width: 100px;"></td>` +
+              `<td>${autos.marca}</td>` +
+              `<td>${autos.modelo}</td>` +
+              `<td>${autos.anio}</td>` +
+              `<td>${autos.precio}</td>` +
+              `<td>${autos.descripcion}</td>` +
+              `<td>${autos.color}</td>` +
+              `<td>${autos.motor}</td>` +
+              `<td>${autos.proveedor}</td>` +
+              `<td>${autos.puertas}</td>` +
+              `<td>${autos.fecha}</td>`;
+
+            //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+            //'<td><img src=https://www.pythonanywhere.com/user/USUARIO/files/home/USUARIO/mysite/static/imagenes/' + producto.imagen_url +' alt="Imagen del producto" style="width: 100px;"></td>' + '<td align="right">' + producto.proveedor + '</td>';
+
+            //Una vez que se crea la fila con el contenido del auto, se agrega a la tabla utilizando el método appendChild del elemento autoList.
+            autoList.appendChild(fila);
+          }
+        })
+
+        //Captura y maneja errores, mostrando una alerta en caso de error al obtener los productos.
+        .catch(function (error) {
+          // Código para manejar errores
+          alert('Error al obtener autos.');
+        });
+    </script>
+    <script src="/static/inventario/inventario.js"></script>
+    <script src="/static/js/scrollreveal.js"></script>
+    <script src="/static/js/scroll.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script src="./js/contacto.js"></script>
+    <script src="https://kit.fontawesome.com/c3e2e6ff32.js" crossorigin="anonymous"></script>
   </main>
-
-  <!-- Footer -->
-  <footer></footer>
-
-  <!--? Scripts -->
-  <script>
-    const URL = "http://127.0.0.1:5000/"
-    // Realizamos la solicitud GET al servidor para obtener todos los autos.
-
-    fetch(URL + 'autos')
-      .then(function (response) {
-        if (response.ok) {
-          //Si la respuesta es exitosa (response.ok), convierte el cuerpo de la respuesta de formato JSON a un objeto JavaScript y pasa estos datos a la siguiente promesa then.
-          return response.json();
-        } else {
-          // Si hubo un error, lanzar explícitamente una excepción para ser "catcheada" más adelante
-          throw new Error('Error al obtener autos.');
-        }
-      })
-
-      //Esta función maneja los datos convertidos del JSON.
-      .then(function (data) {
-        let autoList = document.getElementById('autoList'); //Selecciona el elemento del DOM donde se mostrarán los autos.
-
-        // Iteramos sobre cada auto y agregamos filas a la tabla
-        for (let autos of data) {
-          let fila = document.createElement('tr'); //Crea una nueva fila de tabla (<tr>) para cada auto.
-          fila.innerHTML = `<td><img src=${autos.foto} alt="Foto del auto" style="width: 100px;"></td>` +
-            `<td>${autos.marca}</td>` +
-            `<td>${autos.modelo}</td>` +
-            `<td>${autos.anio}</td>` +
-            `<td>${autos.precio}</td>` +
-            `<td>${autos.descripcion}</td>` +
-            `<td>${autos.color}</td>` +
-            `<td>${autos.motor}</td>` +
-            `<td>${autos.proveedor}</td>` +
-            `<td>${autos.puertas}</td>` +
-            `<td>${autos.fecha}</td>`;
-
-          //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
-          //'<td><img src=https://www.pythonanywhere.com/user/USUARIO/files/home/USUARIO/mysite/static/imagenes/' + producto.imagen_url +' alt="Imagen del producto" style="width: 100px;"></td>' + '<td align="right">' + producto.proveedor + '</td>';
-
-          //Una vez que se crea la fila con el contenido del auto, se agrega a la tabla utilizando el método appendChild del elemento autoList.
-          autoList.appendChild(fila);
-        }
-      })
-
-      //Captura y maneja errores, mostrando una alerta en caso de error al obtener los productos.
-      .catch(function (error) {
-        // Código para manejar errores
-        alert('Error al obtener autos.');
-      });
-  </script>
-  <script src="/static/inventario/inventario.js"></script>
-  <script src="/static/js/scrollreveal.js"></script>
-  <script src="/static/js/scroll.js"></script>
-  <script src="/static/js/script.js"></script>
-  <script src="./js/contacto.js"></script>
-  <script src="https://kit.fontawesome.com/c3e2e6ff32.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

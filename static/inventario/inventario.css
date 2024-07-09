@@ -340,7 +340,7 @@ th, td {
     margin: 1rem;
 }
 /*formulario para agregar autos */
-.container-autoFormulario {
+#container-autoFormulario {
     display: flex;
     flex-direction: column;
     justify-content: center;
